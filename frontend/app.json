@@ -10,29 +10,30 @@
     "newArchEnabled": true,
     "description": "L'app che ti permette di tenere sotto controllo le finanze e di avere suggerimenti su come risparmiare tramite AI",
     "privacy": "public",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#007AFF"
+    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.financetracker.app",
+      "bundleIdentifier": "com.alexledda.financetracker",
       "buildNumber": "1",
       "infoPlist": {
-        "NSCameraUsageDescription": "Questa app ha bisogno di accedere alla fotocamera per scansionare ricevute.",
-        "NSPhotoLibraryUsageDescription": "Questa app ha bisogno di accedere alle foto per allegare ricevute."
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
-      "package": "com.financetracker.app",
+      "package": "com.alexledda.financetracker",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#007AFF"
-      },
-      "edgeToEdgeEnabled": true,
-      "permissions": [
-        "CAMERA",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
-      ]
+      }
     },
     "web": {
       "bundler": "metro",
@@ -41,22 +42,16 @@
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#007AFF"
-        }
-      ]
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
     },
     "extra": {
+      "router": {},
       "eas": {
-        "projectId": "your-project-id-will-be-here"
+        "projectId": "c2bd2361-f1e9-4dff-a2bc-5bce6ce0f306"
       }
     }
   }
