@@ -2,7 +2,7 @@
 
 ## 🔗 URL Base Backend
 ```
-https://expo-finance-1.preview.emergentagent.com/api
+https://finflow-525.preview.emergentagent.com/api
 ```
 
 ---
@@ -470,7 +470,7 @@ Dopo login/registrazione, salva il token e includilo in **TUTTI** gli header del
 // Esempio JavaScript/Axios
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
 
-axios.get('https://expo-finance-1.preview.emergentagent.com/api/transactions', {
+axios.get('https://finflow-525.preview.emergentagent.com/api/transactions', {
   headers: {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
@@ -513,7 +513,7 @@ Per coerenza con l'app mobile, usa queste categorie:
 // api.js o config.js
 import axios from 'axios';
 
-const API_BASE_URL = 'https://expo-finance-1.preview.emergentagent.com/api';
+const API_BASE_URL = 'https://finflow-525.preview.emergentagent.com/api';
 
 // Crea istanza axios
 const api = axios.create({
@@ -626,7 +626,7 @@ export const getAdvice = async (context = '') => {
 
 ### Nel progetto finance-tracker-1316:
 
-- [ ] Modifica URL backend da localhost a `https://expo-finance-1.preview.emergentagent.com/api`
+- [ ] Modifica URL backend da localhost a `https://finflow-525.preview.emergentagent.com/api`
 - [ ] Implementa salvataggio/recupero token (localStorage/sessionStorage)
 - [ ] Aggiungi header `Authorization: Bearer {token}` a tutte le richieste
 - [ ] Implementa gestione errore 401 (logout automatico)
@@ -675,4 +675,4 @@ Se hai domande o problemi durante l'integrazione, ricorda che:
 
 **Ultimo aggiornamento**: 22 Maggio 2025
 **Versione API**: 1.0
-**Backend URL**: https://expo-finance-1.preview.emergentagent.com/api
+**Backend URL**: https://finflow-525.preview.emergentagent.com/api

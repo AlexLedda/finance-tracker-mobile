@@ -206,4 +206,4 @@ test_plan:
 
 agent_communication:
     - agent: "testing"
-      message: "Comprehensive backend testing completed successfully. All 25 tests passed across 6 major functional areas: Authentication (3/3), Transactions (9/9), Budgets (6/6), Goals (5/5), Statistics (1/1), and AI Advice (1/1). The FinanceTracker API is fully functional with proper error handling, JWT authentication, CRUD operations, and AI integration. Backend URL https://expo-finance-1.preview.emergentagent.com/api is working correctly."
+      message: "Comprehensive backend testing completed successfully. All 25 tests passed across 6 major functional areas: Authentication (3/3), Transactions (9/9), Budgets (6/6), Goals (5/5), Statistics (1/1), and AI Advice (1/1). The FinanceTracker API is fully functional with proper error handling, JWT authentication, CRUD operations, and AI integration. Backend URL https://finflow-525.preview.emergentagent.com/api is working correctly."

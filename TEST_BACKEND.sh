@@ -8,7 +8,7 @@ echo "🚀 Test Backend FinanceTracker API"
 echo "======================================"
 echo ""
 
-BASE_URL="https://expo-finance-1.preview.emergentagent.com/api"
+BASE_URL="https://finflow-525.preview.emergentagent.com/api"
 
 # Colori per output
 GREEN='\033[0;32m'
