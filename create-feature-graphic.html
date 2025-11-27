@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feature Graphic Generator</title>
+</head>
+<body>
+    <canvas id="canvas" width="1024" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Gradient background
+        const gradient = ctx.createLinearGradient(0, 0, 1024, 500);
+        gradient.addColorStop(0, '#4F46E5');
+        gradient.addColorStop(1, '#7C3AED');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 1024, 500);
+        
+        // Title
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 80px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Finance Tracker', 512, 180);
+        
+        // Subtitle
+        ctx.font = '36px Arial';
+        ctx.fillText('Gestisci le tue finanze con facilità', 512, 250);
+        
+        // Features icons (emoji style)
+        ctx.font = '48px Arial';
+        const features = ['💰 Transazioni', '📊 Budget', '🎯 Obiettivi'];
+        let x = 200;
+        features.forEach(feature => {
+            ctx.font = '32px Arial';
+            ctx.fillText(feature, x, 350);
+            x += 280;
+        });
+        
+        // Download
+        const link = document.createElement('a');
+        link.download = 'feature-graphic.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    </script>
+</body>
+</html>
