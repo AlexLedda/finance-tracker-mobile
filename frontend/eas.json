@@ -16,8 +16,7 @@
       }
     },
     "production": {
-      "node": "22.0.0",
-      "resourceClass": "large"
+      "node": "22.0.0"
     }
   },
   "submit": {
