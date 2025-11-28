@@ -316,18 +316,26 @@ Dati finanziari:
     context += "\nFornisci consigli pratici e personalizzati per migliorare la gestione finanziaria."
     
     try:
-        # Use OpenAI with Emergent LLM key
-        chat = LlmChat(
-            api_key=os.environ['EMERGENT_LLM_KEY'],
-            session_id=f"advice_{user_id}_{datetime.utcnow().isoformat()}",
-            system_message="Sei un consulente finanziario esperto. Fornisci consigli pratici e personalizzati in italiano."
+        # Use OpenAI directly
+        openai_key = os.environ.get('OPENAI_API_KEY') or os.environ.get('EMERGENT_LLM_KEY')
+        if not openai_key:
+            return {
+                "advice": "Servizio di consigli AI non configurato. Contatta l'amministratore."
+            }
+        
+        client = OpenAI(api_key=openai_key)
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "Sei un consulente finanziario esperto. Fornisci consigli pratici e personalizzati in italiano."},
+                {"role": "user", "content": context}
+            ],
+            max_tokens=500,
+            temperature=0.7
         )
-        chat.with_model("openai", "gpt-4o-mini")
         
-        user_message = UserMessage(text=context)
-        response = await chat.send_message(user_message)
-        
-        return {"advice": response}
+        advice_text = response.choices[0].message.content
+        return {"advice": advice_text}
     except Exception as e:
         logging.error(f"Error getting AI advice: {str(e)}")
         return {
