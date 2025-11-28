@@ -29,7 +29,7 @@
     },
     "android": {
       "package": "com.alexledda.financetracker",
-      "versionCode": 1,
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#007AFF"
