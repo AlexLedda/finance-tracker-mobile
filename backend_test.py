@@ -11,7 +11,7 @@ import sys
 import os
 
 # Get backend URL from environment
-BACKEND_URL = "https://finflow-525.preview.emergentagent.com/api"
+BACKEND_URL = "http://localhost:8000/api"
 
 class FinanceTrackerTester:
     def __init__(self):
