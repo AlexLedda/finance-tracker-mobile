@@ -11,7 +11,7 @@
 import axios from 'axios';
 
 // URL del backend condiviso
-const API_BASE_URL = 'https://expo-finance-1.preview.emergentagent.com/api';
+const API_BASE_URL = 'https://fintrack-mobile-8.preview.emergentagent.com/api';
 
 // Crea istanza axios configurata
 const api = axios.create({

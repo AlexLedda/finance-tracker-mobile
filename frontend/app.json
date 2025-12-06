@@ -10,7 +10,10 @@
     "newArchEnabled": true,
     "description": "L'app che ti permette di tenere sotto controllo le finanze e di avere suggerimenti su come risparmiare tramite AI",
     "privacy": "public",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.financetracker.app",
@@ -49,7 +52,9 @@
           "resizeMode": "contain",
           "backgroundColor": "#007AFF"
         }
-      ]
+      ],
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true

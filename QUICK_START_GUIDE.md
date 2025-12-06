@@ -10,7 +10,7 @@
 ## 🔗 URL Backend Condiviso
 
 ```
-https://expo-finance-1.preview.emergentagent.com/api
+https://fintrack-mobile-8.preview.emergentagent.com/api
 ```
 
 ## 📋 Checklist Rapida per finance-tracker-1316
@@ -24,7 +24,7 @@ Nel tuo progetto `finance-tracker-1316`, trova il file dove configuri l'API (pro
 const API_URL = 'http://localhost:8001/api';
 
 // DOPO
-const API_URL = 'https://expo-finance-1.preview.emergentagent.com/api';
+const API_URL = 'https://fintrack-mobile-8.preview.emergentagent.com/api';
 ```
 
 ### 2️⃣ **Verifica Autenticazione con Token**
@@ -107,7 +107,7 @@ POST /api/advice # Consigli AI personalizzati
 
 ### Login
 ```javascript
-const response = await fetch('https://expo-finance-1.preview.emergentagent.com/api/auth/login', {
+const response = await fetch('https://fintrack-mobile-8.preview.emergentagent.com/api/auth/login', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -122,7 +122,7 @@ localStorage.setItem('token', token);
 
 ### Ottieni Transazioni
 ```javascript
-const response = await fetch('https://expo-finance-1.preview.emergentagent.com/api/transactions', {
+const response = await fetch('https://fintrack-mobile-8.preview.emergentagent.com/api/transactions', {
   headers: {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
@@ -135,7 +135,7 @@ console.log(transactions); // Array di transazioni
 
 ### Crea Transazione
 ```javascript
-const response = await fetch('https://expo-finance-1.preview.emergentagent.com/api/transactions', {
+const response = await fetch('https://fintrack-mobile-8.preview.emergentagent.com/api/transactions', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${token}`,
@@ -183,7 +183,7 @@ Dopo aver collegato la web app:
 - Il token potrebbe essere scaduto → rifai login
 
 ### Errore 404 (Not Found)
-- Verifica l'URL: deve essere `https://expo-finance-1.preview.emergentagent.com/api`
+- Verifica l'URL: deve essere `https://fintrack-mobile-8.preview.emergentagent.com/api`
 - Controlla che l'endpoint sia corretto (es: `/api/transactions` non `/transactions`)
 
 ### Errore CORS
@@ -199,8 +199,8 @@ Dopo aver collegato la web app:
 
 ## 📞 Link Utili
 
-- **Backend API**: https://expo-finance-1.preview.emergentagent.com/api
-- **Test Backend**: https://expo-finance-1.preview.emergentagent.com/api/ → Dovrebbe ritornare `{"message":"FinanceTracker API is running"}`
+- **Backend API**: https://fintrack-mobile-8.preview.emergentagent.com/api
+- **Test Backend**: https://fintrack-mobile-8.preview.emergentagent.com/api/ → Dovrebbe ritornare `{"message":"FinanceTracker API is running"}`
 - **Documentazione Completa**: Vedi `API_DOCUMENTATION.md`
 - **Esempi di Codice**: Vedi `INTEGRATION_EXAMPLES.js`
 

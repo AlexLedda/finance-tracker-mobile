@@ -11,7 +11,7 @@ import sys
 import os
 
 # Get backend URL from environment
-BACKEND_URL = "https://expo-finance-1.preview.emergentagent.com/api"
+BACKEND_URL = "https://fintrack-mobile-8.preview.emergentagent.com/api"
 
 class FinanceTrackerTester:
     def __init__(self):
