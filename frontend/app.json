@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.financetracker.app",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "infoPlist": {
         "NSCameraUsageDescription": "Questa app ha bisogno di accedere alla fotocamera per scansionare ricevute.",
         "NSPhotoLibraryUsageDescription": "Questa app ha bisogno di accedere alle foto per allegare ricevute."
