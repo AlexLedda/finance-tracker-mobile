@@ -16,7 +16,20 @@ sudo systemctl start docker
 sudo systemctl enable docker
 sudo usermod -aG docker $USER
 
-# 2. Clona il repository
+# 2. Configurazione SWAP (2GB) per evitare OOM su t2.micro durante build
+if [ ! -f /swapfile ]; then
+    echo "📦 Configurazione Swap (2GB)..."
+    sudo fallocate -l 2G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+    echo "✅ Swap configurato."
+else
+    echo "ℹ️ Swap già presente."
+fi
+
+# 3. Clone/Update Repository
 echo "📥 Clonazione repository..."
 if [ -d "finance-tracker-mobile" ]; then
     echo "Cartella esistente, aggiorno..."
