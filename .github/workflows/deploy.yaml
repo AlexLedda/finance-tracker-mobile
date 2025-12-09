@@ -17,6 +17,6 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd ~/finance-tracker-mobile
+          cd /home/ubuntu/finance-tracker-mobile
           git pull origin main
-          docker compose up -d --build
+          docker-compose up -d --build
