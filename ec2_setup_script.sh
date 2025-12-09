@@ -50,9 +50,8 @@ if [ -z "$JWT_SECRET" ]; then
     echo "Chiave generata: $JWT_SECRET"
 fi
 
-DOCDB_ENDPOINT="finance-tracker-db.cluster-cs5iqekgmbdh.us-east-1.docdb.amazonaws.com"
-
-# Scrivi il file .env
+# Scrivi il file .env nella root (dove c'è docker-compose.yaml)
+cd ..
 cat > .env <<EOL
 MONGO_URL=mongodb://$DB_USER:$DB_PASS@$DOCDB_ENDPOINT:27017/?tls=true&tlsCAFile=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false
 DB_NAME=financetracker
@@ -63,7 +62,7 @@ EOL
 
 # 5. Avvio con Docker Compose
 echo "🚀 Avvio Backend..."
-cd ..
+# Siamo già nella root
 # Modifica docker-compose per usare il Dockerfile corretto se necessario o build
 sudo docker-compose up -d --build
 
