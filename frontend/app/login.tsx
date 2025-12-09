@@ -13,28 +13,37 @@ import {
 import { useAuth } from '../contexts/AuthContext';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginSchema, registerSchema, LoginFormData, RegisterFormData } from './schemas/auth';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const { login, register } = useAuth();
   const router = useRouter();
 
-  const handleSubmit = async () => {
-    if (!email || !password || (!isLogin && !name)) {
-      Alert.alert('Errore', 'Compila tutti i campi');
-      return;
-    }
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(isLogin ? loginSchema : registerSchema) as any,
+    defaultValues: {
+      email: '',
+      password: '',
+      name: '',
+    },
+  });
 
+  const onSubmit = async (data: RegisterFormData) => {
     setLoading(true);
     try {
       if (isLogin) {
-        await login(email, password);
+        await login(data.email, data.password);
       } else {
-        await register(email, password, name);
+        await register(data.email, data.password, data.name || '');
       }
       router.replace('/(tabs)/dashboard');
     } catch (error: any) {
@@ -42,6 +51,11 @@ export default function Login() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const toggleMode = () => {
+    setIsLogin(!isLogin);
+    reset(); // Reset form state when switching modes
   };
 
   return (
@@ -63,45 +77,79 @@ export default function Login() {
 
         <View style={styles.form}>
           {!isLogin && (
-            <View style={styles.inputContainer}>
-              <Ionicons name="person-outline" size={20} color="#666" style={styles.icon} />
-              <TextInput
-                style={styles.input}
-                placeholder="Nome"
-                value={name}
-                onChangeText={setName}
-                autoCapitalize="words"
-              />
+            <View style={styles.fieldContainer}>
+              <View style={[styles.inputContainer, errors.name && styles.inputError]}>
+                <Ionicons name="person-outline" size={20} color="#666" style={styles.icon} />
+                <Controller
+                  control={control}
+                  name="name"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Nome"
+                      value={value}
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      autoCapitalize="words"
+                      accessibilityLabel="Nome"
+                    />
+                  )}
+                />
+              </View>
+              {errors.name && <Text style={styles.errorText}>{errors.name.message}</Text>}
             </View>
           )}
 
-          <View style={styles.inputContainer}>
-            <Ionicons name="mail-outline" size={20} color="#666" style={styles.icon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
+          <View style={styles.fieldContainer}>
+            <View style={[styles.inputContainer, errors.email && styles.inputError]}>
+              <Ionicons name="mail-outline" size={20} color="#666" style={styles.icon} />
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Email"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    accessibilityLabel="Email"
+                  />
+                )}
+              />
+            </View>
+            {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
           </View>
 
-          <View style={styles.inputContainer}>
-            <Ionicons name="lock-closed-outline" size={20} color="#666" style={styles.icon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
+          <View style={styles.fieldContainer}>
+            <View style={[styles.inputContainer, errors.password && styles.inputError]}>
+              <Ionicons name="lock-closed-outline" size={20} color="#666" style={styles.icon} />
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Password"
+                    value={value}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    secureTextEntry
+                    accessibilityLabel="Password"
+                  />
+                )}
+              />
+            </View>
+            {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
           </View>
 
           <TouchableOpacity
             style={[styles.button, loading && styles.buttonDisabled]}
-            onPress={handleSubmit}
+            onPress={handleSubmit(onSubmit)}
             disabled={loading}
+            accessibilityLabel={isLogin ? "Accedi" : "Registrati"}
           >
             <Text style={styles.buttonText}>
               {loading ? 'Caricamento...' : isLogin ? 'Accedi' : 'Registrati'}
@@ -110,7 +158,8 @@ export default function Login() {
 
           <TouchableOpacity
             style={styles.switchButton}
-            onPress={() => setIsLogin(!isLogin)}
+            onPress={toggleMode}
+            accessibilityLabel={isLogin ? "Passa a registrazione" : "Passa a login"}
           >
             <Text style={styles.switchText}>
               {isLogin ? 'Non hai un account? ' : 'Hai già un account? '}
@@ -153,18 +202,25 @@ const styles = StyleSheet.create({
   form: {
     width: '100%',
   },
+  fieldContainer: {
+    marginBottom: 16,
+  },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
     borderRadius: 12,
-    marginBottom: 16,
     paddingHorizontal: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    borderWidth: 1,
+    borderColor: 'transparent',
+  },
+  inputError: {
+    borderColor: '#ff3b30',
   },
   icon: {
     marginRight: 12,
@@ -174,6 +230,12 @@ const styles = StyleSheet.create({
     height: 56,
     fontSize: 16,
     color: '#333',
+  },
+  errorText: {
+    color: '#ff3b30',
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
   },
   button: {
     backgroundColor: '#007AFF',
