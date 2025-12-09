@@ -50,7 +50,7 @@
       "typedRoutes": true
     },
     "extra": {
-      "EXPO_PUBLIC_BACKEND_URL": "https://finance-tracker-mobile.onrender.com",
+      "EXPO_PUBLIC_BACKEND_URL": "http://54.85.85.121:8000",
       "router": {},
       "eas": {
         "projectId": "c2bd2361-f1e9-4dff-a2bc-5bce6ce0f306"
