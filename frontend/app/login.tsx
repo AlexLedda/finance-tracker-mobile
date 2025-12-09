@@ -46,8 +46,11 @@ export default function Login() {
         await register(data.email, data.password, data.name || '');
       }
       router.replace('/(tabs)/dashboard');
+      router.replace('/(tabs)/dashboard');
     } catch (error: any) {
-      Alert.alert('Errore', error.message);
+      console.error('Auth error:', error);
+      const errorMessage = error.response?.data?.detail || error.message || 'Si è verificato un errore sconosciuto';
+      Alert.alert('Errore di Autenticazione', `${errorMessage}\n\n(API: ${process.env.EXPO_PUBLIC_BACKEND_URL || 'Default'})`);
     } finally {
       setLoading(false);
     }
